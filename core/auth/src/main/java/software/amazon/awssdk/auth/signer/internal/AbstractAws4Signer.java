@@ -190,7 +190,7 @@ public abstract class AbstractAws4Signer<T extends Aws4SignerParams, U extends A
                                         contentSha256;
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("AWS4 Canonical Request: '\"" + canonicalRequest + "\"");
+            LOG.debug("AWS4 Canonical Request: \"{}\"", canonicalRequest);
         }
 
         return canonicalRequest;
@@ -213,7 +213,7 @@ public abstract class AbstractAws4Signer<T extends Aws4SignerParams, U extends A
                                     BinaryUtils.toHex(hash(canonicalRequest));
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("AWS4 String to Sign: '\"" + stringToSign + "\"");
+            LOG.debug("AWS4 String to sign: \"{}\"", stringToSign);
         }
 
         return stringToSign;
@@ -238,8 +238,8 @@ public abstract class AbstractAws4Signer<T extends Aws4SignerParams, U extends A
         }
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Generating a new signing key as the signing key not available in the cache for the date "
-                      + TimeUnit.DAYS.toMillis(daysSinceEpochSigningDate));
+            LOG.debug("Generating a new signing key as the signing key not available in the cache for the date: {}",
+                      TimeUnit.DAYS.toMillis(daysSinceEpochSigningDate));
         }
         byte[] signingKey = newSigningKey(credentials,
                                           signerRequestParams.getFormattedSigningDate(),

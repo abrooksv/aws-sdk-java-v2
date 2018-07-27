@@ -206,9 +206,8 @@ public final class RetryableStage<OutputT> implements RequestToResponsePipeline<
             final int retriesAttempted = requestCount - 2;
             Duration delay = retryHandler.computeDelayBeforeNextRetry();
 
-            if (log.isDebugEnabled()) {
-                log.debug("Retriable error detected, " + "will retry in " + delay + "ms, attempt number: " + retriesAttempted);
-            }
+            SdkStandardLogger.REQUEST_LOGGER.debug(() -> "Retryable error detected, will retry in " + delay.toMillis() + "ms,"
+                                                         + " attempt number " + retriesAttempted);
             TimeUnit.MILLISECONDS.sleep(delay.toMillis());
         }
     }

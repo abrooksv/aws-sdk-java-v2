@@ -91,14 +91,19 @@ public final class AwsCredentialsProviderChain implements AwsCredentialsProvider
             try {
                 AwsCredentials credentials = provider.resolveCredentials();
 
-                log.debug("Loading credentials from {}", provider.toString());
+                if (log.isDebugEnabled()) {
+                    log.debug("Loading credentials from {}", provider);
+                }
 
                 lastUsedProvider = provider;
                 return credentials;
             } catch (RuntimeException e) {
                 // Ignore any exceptions and move onto the next provider
                 String message = provider + ": " + e.getMessage();
-                log.debug("Unable to load credentials from " + message, e);
+                if (log.isDebugEnabled()) {
+                    log.debug("Unable to load credentials from {}", message , e);
+                }
+
                 if (exceptionMessages == null) {
                     exceptionMessages = new ArrayList<>();
                 }
