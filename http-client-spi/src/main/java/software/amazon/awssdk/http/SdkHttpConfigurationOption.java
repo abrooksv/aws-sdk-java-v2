@@ -85,13 +85,6 @@ public final class SdkHttpConfigurationOption<T> extends AttributeMap.Key<T> {
             new SdkHttpConfigurationOption<>("MaxConnectionAcquires", Integer.class);
 
     /**
-     * Option to disable SSL cert validation and SSL host name verification. By default, this option is off.
-     * Only enable this option for testing purposes.
-     */
-    public static final SdkHttpConfigurationOption<Boolean> TRUST_ALL_CERTIFICATES =
-            new SdkHttpConfigurationOption<>("TrustAllCertificates", Boolean.class);
-
-    /**
      * Whether idle connection should be removed after the {@link #CONNECTION_MAX_IDLE_TIMEOUT} has passed.
      */
     public static final SdkHttpConfigurationOption<Boolean> REAP_IDLE_CONNECTIONS =
@@ -103,6 +96,20 @@ public final class SdkHttpConfigurationOption<T> extends AttributeMap.Key<T> {
      */
     public static final SdkHttpConfigurationOption<TlsKeyManagersProvider> TLS_KEY_MANAGERS_PROVIDER =
             new SdkHttpConfigurationOption<>("TlsKeyManagersProvider", TlsKeyManagersProvider.class);
+
+    /**
+     * Option to disable SSL cert validation and SSL host name verification. By default, this option is off.
+     * Only enable this option for testing purposes.
+     */
+    public static final SdkHttpConfigurationOption<Boolean> TRUST_ALL_CERTIFICATES =
+        new SdkHttpConfigurationOption<>("TrustAllCertificates", Boolean.class);
+
+    /**
+     * The {@link TlsTrustManagersProvider} that will be used by the HTTP client when authenticating with a
+     * TLS host.
+     */
+    public static final SdkHttpConfigurationOption<TlsTrustManagersProvider> TLS_TRUST_MANAGERS_PROVIDER =
+        new SdkHttpConfigurationOption<>("TlsTrustManagersProvider", TlsTrustManagersProvider.class);
 
     private static final Duration DEFAULT_SOCKET_READ_TIMEOUT = Duration.ofSeconds(30);
     private static final Duration DEFAULT_SOCKET_WRITE_TIMEOUT = Duration.ofSeconds(30);
